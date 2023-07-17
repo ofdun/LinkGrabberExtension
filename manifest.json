@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "TikTok Grabber",
+    "version": "1.0",
+    "description": "This extension will help you steal other people content",
+    "action": {
+      "default_title": "TikTok Grabber",
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "128": "icon/icon.png"
+    },
+    "permissions": [
+      "contextMenus", "storage", "clipboardRead", "tabs", "activeTab", "scripting", "notifications"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "commands": {
+      "KeyPressed": {
+        "suggested_key": {
+          "default": "Alt+C",
+          "mac": "Command+C"
+        },
+        "description": "Shortcut to add link"
+      }
+    }
+  }

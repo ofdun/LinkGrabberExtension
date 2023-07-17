@@ -1,0 +1,20 @@
+html, body {
+    background-color: antiquewhite;
+    width: 400px;
+    height: 300px;
+}
+
+textarea {
+    width: 370px;
+    height: 100px;
+}
+
+.info {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+hr {
+    margin-left: 0px;
+    width: 380px;
+}
