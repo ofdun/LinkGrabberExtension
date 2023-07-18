@@ -11,7 +11,8 @@
       "128": "icon/icon.png"
     },
     "permissions": [
-      "contextMenus", "storage", "clipboardRead", "tabs", "activeTab", "scripting", "notifications"
+      "contextMenus", "storage", "clipboardRead", "tabs",
+      "activeTab", "scripting", "notifications"
     ],
     "background": {
       "service_worker": "background.js"
@@ -20,7 +21,7 @@
       "KeyPressed": {
         "suggested_key": {
           "default": "Alt+C",
-          "mac": "Command+C"
+          "mac": "MacCtrl+C"
         },
         "description": "Shortcut to add link"
       }
