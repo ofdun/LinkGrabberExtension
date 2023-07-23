@@ -4,7 +4,7 @@
  * @param {string} url - url to save to chrome sync storage
  * This function saves the given url to the chrome sync storage
  */
-function saveLink(url) {
+async function saveLink(url) {
   function get_list() {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(["list"], (items) => {
@@ -21,7 +21,13 @@ function saveLink(url) {
   function set_list(list) {
     chrome.storage.local.set({
       list: list
-    }, () => { });
+    }, () => {
+      if (chrome.runtime.lastError.message.includes("QUOTA_BYTES_PER_ITEM")) {
+        chrome.runtime.sendMessage({
+          error: "QUOTA_BYTES_PER_ITEM"
+        })
+      }
+     });
   }
 
   /**
@@ -39,12 +45,14 @@ function saveLink(url) {
     set_list(list);
     // console.log('Added new link to list');
   }
+  add_to_list(url);
+
   chrome.runtime.sendMessage({
     notification: "true",
     url: url
   });
   // console.log(`current url is ${url}`);
-  add_to_list(url);
+  
 }
 
 async function getCurrentTab() {
@@ -101,5 +109,8 @@ chrome.runtime.onMessage.addListener(
       const naming = truncate(request.url);
       createNotif(naming + " was send");
       sendResponse({ response: "notification sent" });
+    }
+    if (request.error === "QUOTA_BYTES_PER_ITEM") {
+      createNotif("ERROR! There are too many links in storage. Copy them and restore the list!")
     }
   });
