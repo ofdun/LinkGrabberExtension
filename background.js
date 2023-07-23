@@ -83,7 +83,7 @@ async function createNotif(message) {
 
   var opt = {
     type: "basic",
-    title: "TikTok Grabber",
+    title: "Link Grabber",
     message: message,
     iconUrl: "icon/icon.png",
     priority: 1
