@@ -7,8 +7,8 @@
 function saveLink(url) {
   function get_list() {
     return new Promise((resolve, reject) => {
-      chrome.storage.sync.get(["list"], (items) => {
-        console.log(items["list"]);
+      chrome.storage.local.get(["list"], (items) => {
+        // console.log(items["list"]);
         resolve(items['list']);
       });
     });
@@ -19,7 +19,7 @@ function saveLink(url) {
    * This function sets the list in chrome sync storage
    */
   function set_list(list) {
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
       list: list
     }, () => { });
   }
@@ -37,13 +37,13 @@ function saveLink(url) {
       list = url;
     }
     set_list(list);
-    console.log('Added new link to list');
+    // console.log('Added new link to list');
   }
   chrome.runtime.sendMessage({
     notification: "true",
     url: url
   });
-  console.log(`current url is ${url}`);
+  // console.log(`current url is ${url}`);
   add_to_list(url);
 }
 
@@ -68,7 +68,7 @@ chrome.commands.onCommand.addListener(async (command) => {
  * @param {string} url 
  * This function creates notification with given url
  */
-async function createNotif(url) {
+async function createNotif(message) {
   function callback() {
     console.log('notification was sent')
   }
@@ -76,7 +76,7 @@ async function createNotif(url) {
   var opt = {
     type: "basic",
     title: "TikTok Grabber",
-    message: `${url} was saved`,
+    message: message,
     iconUrl: "icon/icon.png",
     priority: 1
   };
@@ -99,7 +99,7 @@ chrome.runtime.onMessage.addListener(
   async function (request, sender, sendResponse) {
     if (request.notification === "true") {
       const naming = truncate(request.url);
-      createNotif(naming);
+      createNotif(naming + " was send");
       sendResponse({ response: "notification sent" });
     }
   });
