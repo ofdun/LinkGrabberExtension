@@ -107,7 +107,7 @@ chrome.runtime.onMessage.addListener(
   async function (request, sender, sendResponse) {
     if (request.notification === "true") {
       const naming = truncate(request.url);
-      createNotif(naming + " was send");
+      createNotif(naming + " was saved");
       sendResponse({ response: "notification sent" });
     }
     if (request.error === "QUOTA_BYTES_PER_ITEM") {
