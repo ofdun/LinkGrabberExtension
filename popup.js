@@ -20,7 +20,7 @@ function setManually() {
 async function backup() {
     function get_list_backup() {
         return new Promise((resolve, reject) => {
-            chrome.storage.sync.get(["list_backup"], (items) => {
+            chrome.storage.local.get(["list_backup"], (items) => {
                 console.log(items["list_backup"]);
                 resolve(items['list_backup']);
             });
@@ -39,14 +39,14 @@ async function reset() {
 }
 
 function backup_list(list) {
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
         list_backup: list
     }, () => { });
 }
 
 function get_list() {
     return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(["list"], (items) => {
+        chrome.storage.local.get(["list"], (items) => {
             console.log(items["list"]);
             resolve(items['list']);
         });
@@ -58,7 +58,7 @@ function get_list() {
    * This function sets the list in chrome sync storage
 */
 function set_list(list) {
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
         list: list
     }, () => { });
 }
