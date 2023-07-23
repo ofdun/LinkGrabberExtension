@@ -11,8 +11,8 @@
       "128": "icon/icon.png"
     },
     "permissions": [
-      "contextMenus", "storage", "clipboardRead", "tabs",
-      "activeTab", "scripting", "notifications"
+      "contextMenus", "storage", "unlimitedStorage", "clipboardRead",
+      "tabs", "activeTab", "scripting", "notifications"
     ],
     "background": {
       "service_worker": "background.js"
