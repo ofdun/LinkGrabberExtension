@@ -3,6 +3,7 @@ copyButton = document.getElementById('copy');
 clearButton = document.getElementById('clear');
 backupButton = document.getElementById('backup');
 setButton = document.getElementById('setList');
+quantityText = document.getElementById('quantity')
 
 copyButton.addEventListener("click", copy);
 clearButton.addEventListener("dblclick", reset);
@@ -80,6 +81,7 @@ async function add_to_list(url) {
 
 async function update_textarea() {
     let list = await get_list();
+    quantityText.innerHTML = list.split('\n').length;
     textarea.value = list;
 }
 
